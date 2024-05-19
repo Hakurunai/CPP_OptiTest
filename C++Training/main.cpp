@@ -168,7 +168,7 @@ struct HeavyHotData
 };
 
 
-#define HotColdSplittingNumber 10'000'000
+#define HotColdSplittingNumber 1'000'000
 static void HotColdSplitting()
 {
     LightData* E1 = new LightData[HotColdSplittingNumber]{};
@@ -249,6 +249,7 @@ struct SimpleStruct
 
 //here all the datas are correctly aligned thanks to the arrays
 //->in this case, one ArraStruct instance cost more size, but this cost will be negligible when we want a lot of datas
+//the number of data need to exceed the size cache for the gaim to be substantial
 struct ArrayStruct
 {
     ArrayStruct(int size) 
@@ -315,7 +316,7 @@ int main()
     //NOTE : if the ColdStruct is not stored through a pointer, we loose some speed
     HotColdSplitting();
 
-    //Strangely, results are different between Debug and Release. In Debug, ArrayOfStructure is a little quicker,
+    //Strangely, results are different between Debug and Release. In Debug, ArrayOfStructure is generally a little quicker,
     //but in Release, the struct of Arrays is WAY MORE EFFICIENT
     ArrayOfStructure_VS_StructureOfArrays();
     return 0;
